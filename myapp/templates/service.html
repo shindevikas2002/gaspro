@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Page</title>
+    <style>
+        /* Add your CSS styles here */
+        /* Style the table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        /* Style the form */
+        .update-form {
+            margin-top: 20px;
+        }
+        .update-form label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .update-form select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+        }
+        .update-form button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .update-form button:hover {
+            background-color: #0056b3;
+        }
+        /* Style the image */
+        .thumbnail {
+            max-width: 100px;
+            max-height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Service Page</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Request ID</th>
+             
+               
+                <th>customerid</th>
+                <th>Description</th>
+                <th>Service Request</th>
+                <th>Image</th>
+                <th>Date Submitted</th>
+                <th>Date Resolved</th>
+                <th>Status</th>
+               
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for request in service_requests %}
+            <tr>
+               <td>{{ request.0 }}</td>
+                <td>{{ request.1 }}</td>
+                <td>{{ request.2 }}</td>
+                <td>{{ request.3 }}</td>
+                <td>
+                    {% if request.4 %}
+                    <img src="{{ request.4.url }}" alt="Image" class="thumbnail">
+                    {% endif %}
+                </td>
+                <td>{{ request.5 }}</td>
+                <td>{{ request.6 }}</td>
+                <td>{{ request.7 }}</td>
+                
+               
+               
+                <td>
+                    <form action="{% url 'update_status' %}" method="POST" class="update-form">
+                        {% csrf_token %}
+                        <input type="hidden" name="request_id" value="{{ request.0 }}">
+                        <label for="new_status">Update Status:</label>
+                        <select name="new_status" id="new_status">
+                            <option value="Pending">Pending</option>
+                            <option value="In Progress">In Progress</option>
+                            <option value="Resolved">Resolved</option>
+                        </select>
+                        <button type="submit">Update</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

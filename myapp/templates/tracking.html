@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Requests Tracking</title>
+    <style>
+        /* Add your CSS styles here */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Service Requests Tracking</h1>
+    <p>Service requests for Contact Number: {{ contact_number }}</p>
+    <table>
+        <thead>
+            <tr>
+                <th>Request ID</th>
+               
+                <th>Description</th>
+                <th>Service Request</th>
+                <th>Date Submitted</th>
+                <th>Date Resolved</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for request in service_requests %}
+            <tr>
+                <td>{{ request.0 }}</td>
+                <td>{{ request.2 }}</td>
+                <td>{{ request.3 }}</td>
+                
+                <td>{{ request.5 }}</td>
+                <td>{{ request.6 }}</td>
+                <td>{{ request.7 }}</td>
+                
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

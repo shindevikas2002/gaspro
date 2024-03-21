@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .navbar {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+        .navbar h1 {
+            margin: 0;
+            font-size: 36px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+        }
+        .section {
+            width: 30%;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            background-color: #f9f9f9;
+        }
+        .section h1, .section h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .section form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .section input[type="text"],
+        .section input[type="password"],
+        .section input[type="email"],
+        .section textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        .section button[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .section button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <h1>Gas Utility</h1>
+    </div>
+    <div class="container">
+        <div class="section">
+            <h1>Register</h1>
+            <form action="{% url 'register_customer1' %}" method="POST">
+                {% csrf_token %}
+                <input type="text" name="name" placeholder="Name" required><br>
+                <input type="email" name="email" placeholder="Email" required><br>
+                <input type="text" name="phone" placeholder="Phone Number" required><br>
+                <textarea name="address" placeholder="Address" required></textarea><br>
+                <input type="password" name="password" placeholder="Password" required><br>
+                <input type="password" name="confirm_password" placeholder="Confirm Password" required><br>
+                <button type="submit">Register</button>
+            </form>
+        </div>
+        <div class="section">
+            <h1>Admin Login</h1>
+            <form action="{% url 'login' %}" method="POST">
+                {% csrf_token %}
+                <input type="text" name="username" placeholder="Username" required><br>
+                <input type="password" name="password" placeholder="Password" required><br>
+                <button type="submit">Login</button>
+            </form>
+        </div>
+        <div class="section">
+            <h2>User Login</h2>
+            <form action="{% url 'logincust1' %}" method="POST">
+                {% csrf_token %}
+                <input type="text" name="phone" placeholder="Phone Number" required><br>
+                <input type="password" name="password" placeholder="Password" required><br>
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
